@@ -2,12 +2,15 @@ import React from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ProductData } from '../types/product';
 
+const env =import.meta.env;
+
 
 const Product = () => {
     const { data: products, isLoading, error } = useQuery({
         queryKey: ["products"],
         queryFn: async () => {
-            const response = await fetch('https://fakestoreapi.com/products');
+            // const response = await fetch('https://fakestoreapi.com/products');
+            const response = await fetch(env.VITE_KEY_API_PRODUCT_URL);
             if (!response.ok) throw new Error("Error fetching data");
             return response.json()
         },

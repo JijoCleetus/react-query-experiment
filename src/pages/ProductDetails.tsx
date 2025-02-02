@@ -11,6 +11,10 @@ const ProductDetails = ({ id }: ProductDetailProps) => {
             return response.json() as unknown as ProductData
         }
     })
+
+    if (isLoading) return <p>Loading....</p>
+    if (error) return <p>Error occured: {error.message}</p>
+
     return (
         <div>
             <h2>ProductDetails</h2>

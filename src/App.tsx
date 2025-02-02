@@ -5,8 +5,8 @@ import ProductDetails from './pages/ProductDetails';
 function App() {
   return (
     <>
-      {/* <Product/> */}
-      <ProductDetails id={1}/>
+      <Product/>
+      {/* <ProductDetails id={1}/> */}
     </>
   )
 }
