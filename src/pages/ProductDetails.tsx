@@ -1,15 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import React from 'react'
 import { ProductData, ProductDetailProps } from '../types/product'
+import { Link, useParams } from 'react-router-dom'
 
-const ProductDetails = ({ id }: ProductDetailProps) => {
+const ProductDetails = () => {
+    const params =useParams<{id:string}>()
     const { data: product, isLoading, error } = useQuery({
-        queryKey: ["post", id],
+        queryKey: ["post", params.id],
         queryFn: async () => {
-            const response = await fetch(`https://fakestoreapi.com/products/${id}`)
+            const response = await fetch(`https://fakestoreapi.com/products/${params.id}`)
             if (!response.ok) throw new Error("Error fetching data");
             return response.json() as unknown as ProductData
-        }
+        },
+        staleTime:10000
     })
 
     if (isLoading) return <p>Loading....</p>
@@ -17,6 +20,7 @@ const ProductDetails = ({ id }: ProductDetailProps) => {
 
     return (
         <div>
+            <h3><Link to='/product'>Back</Link></h3>
             <h2>ProductDetails</h2>
             <div className="card">
                 <img src={product?.image} alt="Avatar" />

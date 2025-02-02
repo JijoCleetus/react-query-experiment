@@ -1,12 +1,15 @@
+import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css'
 import Product from './pages/Product';
 import ProductDetails from './pages/ProductDetails';
 
+import router from './Router';
+
 function App() {
   return (
     <>
-      <Product/>
-      {/* <ProductDetails id={1}/> */}
+      <RouterProvider router={router}>
+      </RouterProvider>
     </>
   )
 }
