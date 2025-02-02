@@ -4,3 +4,7 @@ export interface ProductData {
     description: string;
     image: string;
   }
+
+  export interface ProductDetailProps {
+    id: number
+}
