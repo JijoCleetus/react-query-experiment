@@ -2,12 +2,14 @@ import React from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { ProductData } from '../types/product';
 import { Link } from 'react-router-dom';
+import { useLoader } from '../hooks/useLoader';
 
 const env =import.meta.env;
 
 
 const Product = () => {
-    const { data: products, isLoading, error } = useQuery({
+    const {start,stop} = useLoader()
+    const { data: products, isLoading, error,isSuccess } = useQuery({
         queryKey: ["products"],
         queryFn: async () => {
             const response = await fetch(env.VITE_KEY_API_PRODUCT_URL);
@@ -17,7 +19,8 @@ const Product = () => {
         staleTime:10000
     })
 
-    if (isLoading) return <p>Loading....</p>
+    if (isLoading) start();
+    if(isSuccess) stop();
     if (error) return <p>Error occured: {error.message}</p>
 
     return (
